@@ -412,7 +412,6 @@ ul { list-style: none; }
 .topic-links li a:hover { text-decoration: underline; }
 
 /* --- Aside --- */
-.page-aside { }
 .aside-card {
   background: var(--c-bg-primary);
   border: 0.5px solid var(--c-border);
