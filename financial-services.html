@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Services — Wendi Help</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">Wendi</a>
+    <div class="nav-right">
+      <a href="guides.html" class="nav-link">Guides <i class="ti ti-chevron-down" aria-hidden="true"></i></a>
+    </div>
+  </nav>
+
+  <div class="breadcrumb-bar">
+    <a href="index.html" class="breadcrumb-link">Help</a>
+    <i class="ti ti-chevron-right breadcrumb-sep" aria-hidden="true"></i>
+    <span class="breadcrumb-current">Financial Services</span>
+  </div>
+
+  <div class="page-layout">
+    <main class="page-main">
+      <h1 class="page-heading">Financial Services</h1>
+
+      <!-- TRANSFERS -->
+      <div class="topic-card" id="transfers">
+        <button class="topic-header" aria-expanded="true" onclick="toggleTopic(this)">
+          <div class="topic-left">
+            <div class="topic-icon-box"><i class="ti ti-arrows-exchange" aria-hidden="true"></i></div>
+            <div>
+              <div class="topic-name">Transfers and Payments</div>
+              <div class="topic-sub">Choose how you want to move your money across Banks, Wallets (MTN, Airtel and Flexipay) and Western Union</div>
+            </div>
+          </div>
+          <i class="ti ti-chevron-up chevron" aria-hidden="true"></i>
+        </button>
+        <div class="topic-body open">
+          <ul class="topic-links">
+            <li><a href="wendi-to-bank.html">Wendi to Bank</a></li>
+            <li><a href="send-mtn.html">Wendi to MTN</a></li>
+            <li><a href="send-airtel.html">Wendi to Airtel</a></li>
+            <li><a href="wendi-to-flexipay.html">Wendi to FlexiPay</a></li>
+            <li><a href="merchant-payments.html">Merchant Payments — Goods, Food, Fuel and more</a></li>
+            <li><a href="standing-orders-create.html">Create Standing Orders</a></li>
+            <li><a href="standing-orders-view.html">View Standing Orders</a></li>
+            <li><a href="standing-orders-change.html">Change Standing Orders</a></li>
+            <li><a href="standing-orders-stop.html">Stop Standing Orders</a></li>
+            <li><a href="wu-send.html">Send to Western Union</a></li>
+            <li><a href="receive-wu.html">Receive from Western Union</a></li>
+            <li><a href="wu-receipts.html">View Western Union Receipts</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BILL PAYMENT -->
+      <div class="topic-card">
+        <button class="topic-header" aria-expanded="false" onclick="toggleTopic(this)">
+          <div class="topic-left">
+            <div class="topic-icon-box"><i class="ti ti-file-invoice" aria-hidden="true"></i></div>
+            <div>
+              <div class="topic-name">Bill Payment</div>
+              <div class="topic-sub">Pay your essential bills quickly</div>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+        </button>
+        <div class="topic-body">
+          <ul class="topic-links">
+            <li><a href="#">Utility Bills</a></li>
+            <li><a href="#">TV Subscriptions</a></li>
+            <li><a href="#">Internet Bills</a></li>
+            <li><a href="#">School Fees</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- GROUPS -->
+      <div class="topic-card">
+        <button class="topic-header" aria-expanded="false" onclick="toggleTopic(this)">
+          <div class="topic-left">
+            <div class="topic-icon-box"><i class="ti ti-users-group" aria-hidden="true"></i></div>
+            <div>
+              <div class="topic-name">Groups</div>
+              <div class="topic-sub">Manage group money with confidence</div>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+        </button>
+        <div class="topic-body">
+          <ul class="topic-links">
+            <li><a href="#">Create a Group</a></li>
+            <li><a href="#">Invite Members</a></li>
+            <li><a href="#">Group Contributions</a></li>
+            <li><a href="#">Group Withdrawals</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LOANS -->
+      <div class="topic-card">
+        <button class="topic-header" aria-expanded="false" onclick="toggleTopic(this)">
+          <div class="topic-left">
+            <div class="topic-icon-box"><i class="ti ti-coin" aria-hidden="true"></i></div>
+            <div>
+              <div class="topic-name">Loans</div>
+              <div class="topic-sub">Enjoy our lending services</div>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+        </button>
+        <div class="topic-body">
+          <ul class="topic-links">
+            <li><a href="#">Apply for a Loan</a></li>
+            <li><a href="#">Check Loan Status</a></li>
+            <li><a href="#">Repay a Loan</a></li>
+            <li><a href="#">Loan Eligibility</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ACCOUNT SERVICES -->
+      <div class="topic-card">
+        <button class="topic-header" aria-expanded="false" onclick="toggleTopic(this)">
+          <div class="topic-left">
+            <div class="topic-icon-box"><i class="ti ti-settings" aria-hidden="true"></i></div>
+            <div>
+              <div class="topic-name">Account Services</div>
+              <div class="topic-sub">Manage your profile, statements, security and referrals</div>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+        </button>
+        <div class="topic-body">
+          <ul class="topic-links">
+            <li><a href="#">Edit Profile</a></li>
+            <li><a href="#">View Statements</a></li>
+            <li><a href="#">Change PIN</a></li>
+            <li><a href="#">Referral Programme</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </main>
+
+    <aside class="page-aside">
+      <div class="aside-card">
+        <h3 class="aside-heading">Popular Articles</h3>
+        <ul class="aside-links">
+          <li><a href="send-mtn.html"><i class="ti ti-arrow-right" aria-hidden="true"></i>Send Money to MTN</a></li>
+          <li><a href="send-airtel.html"><i class="ti ti-arrow-right" aria-hidden="true"></i>Send Money to Airtel</a></li>
+          <li><a href="pay-fuel.html"><i class="ti ti-arrow-right" aria-hidden="true"></i>Pay for Fuel</a></li>
+          <li><a href="receive-wu.html"><i class="ti ti-arrow-right" aria-hidden="true"></i>Receive Western Union</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Wendi by Pearl Bank. All rights reserved.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
