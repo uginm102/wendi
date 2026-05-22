@@ -411,6 +411,10 @@ ul { list-style: none; }
   padding: 3px 0;
   transition: opacity 0.15s;
 }
+.topic-links li{
+  margin-left: 20px;
+}
+
 .topic-links li a::before {
   content: '·';
   color: var(--orange-mid);
@@ -752,6 +756,12 @@ a:hover {
   pointer-events: auto;
 }
 .slide svg { width: 100%; height: 100%; display: block; }
+
+.slide.slide-prev  { transform: translateX(-24px); }
+.slide.slide-next  { transform: translateX(24px); }
+.slide svg { width: 100%; height: 100%; display: block; }
+.slide img  { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top; }
+
 
 .carousel-dots {
   display: flex;

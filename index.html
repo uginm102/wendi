@@ -1,136 +1,464 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wendi Help &amp; Support</title>
-  <link rel="icon" type="image/png" href="images/logo-full.png">
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wendi Help &amp; Support</title>
+    <link rel="icon" type="image/png" href="images/logo-full.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,600&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- NAV -->
-  <nav class="nav">
-    <a href="index.html" class="logo-img">
-      <img src="images/logo-full.png" alt="Wendi Logo" style="height: 50px; width: auto; margin-top: 5px;" />
-    </a>
-    <div class="nav-right">
-      <a href="#" class="nav-link">Guides <i class="ti ti-chevron-down" aria-hidden="true"></i></a>
-    </div>
-  </nav>
-<main class="main-content">
-  <!-- HERO -->
-  <section class="hero">
-    <h1 class="hero-title">Good Evening! Welcome to<br>Wendi Help &amp; Support</h1>
-    <div class="search-bar">
-      <i class="ti ti-search" aria-hidden="true"></i>
-      <input type="text" placeholder="How can we help?" id="searchInput" />
-      <button class="search-btn" onclick="handleSearch()">Search</button>
-    </div>
-  </section>
+    <style>
+      /* ---------- BUTTON WRAPPER: ALWAYS ROW DIRECTION (even on mobile) ---------- */
+        .buttons-wrapper {
+            display: flex;
+            flex-direction: row;          /* Force row layout on all screen sizes */
+            flex-wrap: wrap;              /* Allow wrapping only if absolutely necessary (very small screens, but keeps row behavior) */
+            justify-content: center;
+            align-items: center;
+            gap: 1.2rem;
+            margin: 1.8rem 0 1rem;
+        }
 
-  <!-- QUICK LINKS -->
-  <div class="quick-links-wrap">
-    <a href="financial-services.html" class="quick-link">
-      <i class="ti ti-building-bank" aria-hidden="true"></i>
-      <span>Financial Services</span>
-    </a>
-    <a href="#" class="quick-link">
-      <i class="ti ti-device-mobile" aria-hidden="true"></i>
-      <span>Deposit on Wendi</span>
-    </a>
-    <a href="#" class="quick-link">
-      <i class="ti ti-cash" aria-hidden="true"></i>
-      <span>Withdraw Cash</span>
-    </a>
-    <a href="#" class="quick-link">
-      <i class="ti ti-percentage" aria-hidden="true"></i>
-      <span>Loans</span>
-    </a>
-    <a href="#" class="quick-link">
-      <i class="ti ti-trending-up" aria-hidden="true"></i>
-      <span>Savings</span>
-    </a>
-    <a href="#" class="quick-link">
-      <i class="ti ti-users" aria-hidden="true"></i>
-      <span>Saccos</span>
-    </a>
-    <a href="#" class="quick-link">
-      <i class="ti ti-shopping-cart" aria-hidden="true"></i>
-      <span>Payments</span>
-    </a>
-  </div>
+        /* ---------- BASE STORE BUTTON STYLES ---------- */
+        .store-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            padding: 0.7rem 1.5rem;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-decoration: none;
+            gap: 10px;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            border: none;
+            flex-shrink: 0;              /* Prevent buttons from shrinking too much */
+        }
 
-  <!-- GUIDES -->
-  <section class="section">
-    <h2 class="section-title">Useful Guides</h2>
-    <div class="guides-grid">
+        /* Hover and active states for all buttons */
+        .store-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
+        }
 
-      <a href="#" class="guide-card">
-        <div class="guide-img"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
-        <div class="guide-body">
-          <p class="guide-tag">Guide</p>
-          <h3 class="guide-title">Your Guide to Wendi as a User</h3>
-          <p class="guide-desc">What to do when you find an unauthorised card transaction on your statement.</p>
-        </div>
+        .store-button:active {
+            transform: scale(0.97);
+            transition: 0.05s;
+        }
+
+        /* Focus state for keyboard accessibility */
+        .store-button:focus-visible {
+            outline: 3px solid #007aff;
+            outline-offset: 3px;
+            border-radius: 14px;
+        }
+
+        /* ---------- APPLE APP STORE BUTTON SPECIFIC ---------- */
+        .appstore-btn {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .appstore-btn:hover {
+            background: linear-gradient(135deg, #2c2c2c, #111111);
+        }
+
+        /* ---------- GOOGLE PLAY BUTTON SPECIFIC ---------- */
+        .googleplay-btn {
+            background: linear-gradient(135deg, #1a2a3a 0%, #0f212f 100%);
+        }
+
+        .googleplay-btn:hover {
+            background: linear-gradient(135deg, #214353, #0f2f3f);
+        }
+
+        /* ---------- ICONS (PURE CSS/SVG VIA BACKGROUND) ---------- */
+        .apple-icon {
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.85 21.18 10.37 21.95 9.17 22C7.87 22.05 6.93 20.68 6.07 19.46C4.27 16.86 3.06 12.9 4.86 10.08C5.76 8.7 7.22 7.84 8.78 7.81C10.13 7.78 11.39 8.69 12.17 8.69C12.95 8.69 14.5 7.6 16.11 7.76C16.92 7.82 18.54 8.1 19.62 9.44C19.53 9.5 17.99 10.45 18.03 12.41C18.06 14.17 19.43 15.06 19.46 15.07C19.44 15.11 18.84 16.86 17.54 18.6L18.71 19.5ZM14.32 5.9C15 5.07 15.42 3.91 15.28 2.75C14.29 2.82 13.12 3.44 12.42 4.27C11.81 5 11.35 6.16 11.5 7.29C12.58 7.42 13.66 6.74 14.32 5.9Z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .google-icon {
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z' fill='%23FFC107'/%3E%3Cpath d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z' fill='%234CAF50'/%3E%3Cpath d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z' fill='%23FF3D00'/%3E%3Cpath d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z' fill='%234285F4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        /* ---------- BUTTON TEXT STYLES ---------- */
+        .btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .small-line {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            color: rgba(255, 255, 255, 0.75);
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .main-line {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            color: white;
+            line-height: 1.25;
+        }
+
+        /* ---------- HELPER TEXT (OPTIONAL) ---------- */
+        .info-text {
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+    letter-spacing: -0.2px;
+    color: white;
+            text-align: center;
+        }
+
+        hr {
+            margin: 1.3rem 0 0.5rem;
+            border: 0;
+            height: 1px;
+            background: radial-gradient(circle, #cbd5e1 40%, transparent);
+        }
+
+        /* ---------- RESPONSIVE: ROW LAYOUT ON MOBILE (NO STACKING) ---------- */
+        /* 
+           On very small screens (below 500px), buttons may wrap if there isn't enough space,
+           but they will still be in row direction (flex-direction: row) and wrap as a last resort.
+           To ensure they never wrap and stay side-by-side, we can add a min-width to the container
+           and adjust button padding. However, for extreme screens (320px), we slightly shrink 
+           button padding but maintain row layout.
+        */
+        @media (max-width: 550px) {
+            .buttons-wrapper {
+                gap: 0.8rem;              /* Slightly smaller gap on mobile but still row */
+                flex-wrap: wrap;          /* Allow wrap ONLY if both buttons don't fit, but they will due to shrink */
+                justify-content: center;
+            }
+            
+            .store-button {
+                padding: 0.55rem 1rem;
+                gap: 8px;
+                flex-shrink: 1;           /* Allow slight shrinking if needed */
+            }
+            
+            .apple-icon, .google-icon {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .main-line {
+                font-size: 15px;
+            }
+            
+            .small-line {
+                font-size: 9px;
+            }
+            
+            .store-buttons-container {
+                padding: 1.5rem 1rem;
+            }
+        }
+        
+        /* For extremely narrow screens (<= 400px) we ensure row layout still works */
+        @media (max-width: 450px) {
+            .buttons-wrapper {
+                gap: 0.6rem;
+            }
+            
+            .store-button {
+                padding: 0.5rem 0.8rem;
+            }
+            
+            .main-line {
+                font-size: 13px;
+            }
+            
+            .small-line {
+                font-size: 8px;
+            }
+            
+            .apple-icon, .google-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+        
+        /* For devices as small as 360px, keep them side by side by forcing no-wrap? 
+           We'll set a media query that ensures the wrapper has enough flexibility, but
+           we prioritize row direction. If text becomes too cramped, we use smaller text.
+           The buttons remain in a row layout even on 320px screens. */
+        @media (max-width: 380px) {
+            .buttons-wrapper {
+                flex-wrap: nowrap;        /* Force no wrapping on tiny screens to keep row */
+                gap: 0.5rem;
+            }
+            
+            .store-button {
+                padding: 0.45rem 0.6rem;
+                min-width: auto;
+            }
+            
+            .main-line {
+                font-size: 12px;
+            }
+            
+            .small-line {
+                font-size: 7px;
+            }
+            
+            .btn-text {
+                max-width: 100%;
+            }
+        }
+        
+        /* For very small screens (<= 340px) we keep row direction and further fine-tune */
+        @media (max-width: 340px) {
+            .store-button {
+                padding: 0.4rem 0.5rem;
+                gap: 5px;
+            }
+            
+            .main-line {
+                font-size: 11px;
+                letter-spacing: -0.1px;
+            }
+            
+            .small-line {
+                font-size: 7px;
+            }
+            
+            .apple-icon, .google-icon {
+                width: 22px;
+                height: 22px;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <a href="index.html" class="logo-img">
+        <img
+          src="images/logo-full.png"
+          alt="Wendi Logo"
+          style="height: 50px; width: auto; margin-top: 5px"
+        />
       </a>
-
-      <a href="#" class="guide-card">
-        <div class="guide-img"><i class="ti ti-building-store" aria-hidden="true"></i></div>
-        <div class="guide-body">
-          <p class="guide-tag">Guide</p>
-          <h3 class="guide-title">Your Guide to Wendi as a Merchant</h3>
-          <p class="guide-desc">How we protect you from malware threats and scams.</p>
-        </div>
-      </a>
-
-      <a href="#" class="guide-card">
-        <div class="guide-img"><i class="ti ti-badge" aria-hidden="true"></i></div>
-        <div class="guide-body">
-          <p class="guide-tag">Guide</p>
-          <h3 class="guide-title">Your Guide to Wendi as an Agent</h3>
-          <p class="guide-desc">How to prevent yourself from becoming a victim of scam or fraud.</p>
-        </div>
-      </a>
-
-      <a href="#" class="guide-card">
-        <div class="guide-img"><i class="ti ti-building-community" aria-hidden="true"></i></div>
-        <div class="guide-body">
-          <p class="guide-tag">Guide</p>
-          <h3 class="guide-title">Your Guide as a Sacco on Wendi</h3>
-          <p class="guide-desc">Submit waiver requests for annual fees, finance or late charges.</p>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- POPULAR ARTICLES -->
-  <section class="popular-section">
-    <div class="popular-inner">
-      <h3 class="popular-heading">Popular Articles</h3>
-      <div class="popular-chips">
-        <a href="#" class="chip"><i class="ti ti-arrow-right" aria-hidden="true"></i>Send Money to MTN</a>
-        <a href="#" class="chip"><i class="ti ti-arrow-right" aria-hidden="true"></i>Send Money to Airtel</a>
-        <a href="#" class="chip"><i class="ti ti-arrow-right" aria-hidden="true"></i>Pay for Fuel</a>
-        <a href="#" class="chip"><i class="ti ti-arrow-right" aria-hidden="true"></i>Receive Western Union</a>
+      <div class="nav-right">
+        <a href="#" class="nav-link"
+          >Guides <i class="ti ti-chevron-down" aria-hidden="true"></i
+        ></a>
       </div>
-    </div>
-  </section>
+    </nav>
+    <main class="main-content">
+      <!-- HERO -->
+      <section class="hero">
+        <h1 class="hero-title">
+          Good Evening! Welcome to<br />Wendi Help &amp; Support
+        </h1>
+        <div class="search-bar">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="How can we help?" id="searchInput" />
+          <button class="search-btn" onclick="handleSearch()">Search</button>
+        </div>
+      </section>
 
-  <!-- FOOTER CTA -->
-  <div class="footer-cta">
-    <p>Get the latest Wendi mobile app now!</p>
-    <button class="footer-btn"><i class="ti ti-download" aria-hidden="true"></i> Download Wendi</button>
-  </div>
-</main>
-  <footer class="footer">
-    <p>&copy; 2025 Wendi by Pearl Bank. All rights reserved.</p>
-  </footer>
+      <!-- QUICK LINKS -->
+      <div class="quick-links-wrap">
+        <a href="financial-services.html" class="quick-link">
+          <i class="ti ti-building-bank" aria-hidden="true"></i>
+          <span>Financial Services</span>
+        </a>
+        <a href="#" class="quick-link">
+          <i class="ti ti-device-mobile" aria-hidden="true"></i>
+          <span>Deposit on Wendi</span>
+        </a>
+        <a href="#" class="quick-link">
+          <i class="ti ti-cash" aria-hidden="true"></i>
+          <span>Withdraw Cash</span>
+        </a>
+        <a href="#" class="quick-link">
+          <i class="ti ti-percentage" aria-hidden="true"></i>
+          <span>Loans</span>
+        </a>
+        <a href="#" class="quick-link">
+          <i class="ti ti-trending-up" aria-hidden="true"></i>
+          <span>Savings</span>
+        </a>
+        <a href="#" class="quick-link">
+          <i class="ti ti-users" aria-hidden="true"></i>
+          <span>Saccos</span>
+        </a>
+        <a href="#" class="quick-link">
+          <i class="ti ti-shopping-cart" aria-hidden="true"></i>
+          <span>Payments</span>
+        </a>
+      </div>
 
-  <script src="main.js"></script>
-</body>
+      <!-- GUIDES -->
+      <section class="section">
+        <h2 class="section-title">Useful Guides</h2>
+        <div class="guides-grid">
+          <a href="#" class="guide-card">
+            <div class="guide-img">
+              <i class="ti ti-user-circle" aria-hidden="true"></i>
+            </div>
+            <div class="guide-body">
+              <p class="guide-tag">Guide</p>
+              <h3 class="guide-title">Your Guide to Wendi as a User</h3>
+              <p class="guide-desc">
+                This user guide is designed to help end users easily navigate
+                and use the Pearl Bank Wendi App, with step-by-step guidance on
+                account access, transactions, key features, security, and
+                everyday banking activities.
+              </p>
+            </div>
+          </a>
+
+          <a href="#" class="guide-card">
+            <div class="guide-img">
+              <i class="ti ti-building-store" aria-hidden="true"></i>
+            </div>
+            <div class="guide-body">
+              <p class="guide-tag">Guide</p>
+              <h3 class="guide-title">Your Guide to Wendi as a Merchant</h3>
+              <p class="guide-desc">
+                This merchant guide is designed to help merchants effectively
+                navigate and use the Pearl Bank Wendi App, with step-by-step
+                guidance on merchant onboarding, payment collection, transaction
+                management, settlements, security, and day-to-day merchant
+                operations.
+              </p>
+            </div>
+          </a>
+
+          <a href="#" class="guide-card">
+            <div class="guide-img">
+              <i class="ti ti-badge" aria-hidden="true"></i>
+            </div>
+            <div class="guide-body">
+              <p class="guide-tag">Guide</p>
+              <h3 class="guide-title">Your Guide to Wendi as an Agent</h3>
+              <p class="guide-desc">
+                This guide is designed to help Agents effectively navigate and
+                use the Pearl Bank Wendi App, with step-by-step guidance on
+                agent onboarding, customer transactions, cash management,
+                security, and day-to-day agent banking operations.
+              </p>
+            </div>
+          </a>
+
+          <a href="#" class="guide-card">
+            <div class="guide-img">
+              <i class="ti ti-building-community" aria-hidden="true"></i>
+            </div>
+            <div class="guide-body">
+              <p class="guide-tag">Guide</p>
+              <h3 class="guide-title">Your Guide as a Sacco on Wendi</h3>
+              <p class="guide-desc">
+                This guide is designed to help users in Saccos and group
+                settings easily navigate and use the Pearl Bank Wendi App,
+                providing clear step-by-step guidance on group account access,
+                contributions, transactions, approvals, security, and everyday
+                financial management activities.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- POPULAR ARTICLES -->
+      <section class="popular-section">
+        <div class="popular-inner">
+          <h3 class="popular-heading">Popular Articles</h3>
+          <div class="popular-chips">
+            <a href="#" class="chip"
+              ><i class="ti ti-arrow-right" aria-hidden="true"></i>Send Money to
+              MTN</a
+            >
+            <a href="#" class="chip"
+              ><i class="ti ti-arrow-right" aria-hidden="true"></i>Send Money to
+              Airtel</a
+            >
+            <a href="#" class="chip"
+              ><i class="ti ti-arrow-right" aria-hidden="true"></i>Pay for
+              Fuel</a
+            >
+            <a href="#" class="chip"
+              ><i class="ti ti-arrow-right" aria-hidden="true"></i>Receive
+              Western Union</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER CTA -->
+      <div class="footer-cta">
+        <p>Get the latest Wendi mobile app now!</p>
+        <!-- BUTTON WRAPPER: always row direction (desktop + mobile) -->
+        <div class="buttons-wrapper">
+            <!-- APPLE APP STORE BUTTON -->
+            <!-- 🔁 REPLACE THE href WITH YOUR APP STORE LINK -->
+            <a href="https://apps.apple.com/ug/app/wendi-customer/id6450673910" 
+               class="store-button appstore-btn" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-label="Download on the Apple App Store">
+                <div class="apple-icon" aria-hidden="true"></div>
+                <div class="btn-text">
+                    <span class="small-line">Download on the</span>
+                    <span class="main-line">App Store</span>
+                </div>
+            </a>
+
+            <!-- GOOGLE PLAY STORE BUTTON -->
+            <!-- 🔁 REPLACE THE href WITH YOUR GOOGLE PLAY LINK -->
+            <a href="https://play.google.com/store/apps/details?id=com.pbu.wendi.customer.app&hl=en" 
+               class="store-button googleplay-btn" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-label="Get it on Google Play">
+                <div class="google-icon" aria-hidden="true"></div>
+                <div class="btn-text">
+                    <span class="small-line">Get it on</span>
+                    <span class="main-line">Google Play</span>
+                </div>
+            </a>
+        </div>
+        
+        <hr />
+        <div class="info-text">
+            ⚡ Tap a button to download from your device's official store
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <p>&copy; 2026 Wendi by Pearl Bank. All rights reserved.</p>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
 </html>
