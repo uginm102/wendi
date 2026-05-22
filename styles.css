@@ -573,21 +573,37 @@ a:hover {
   }
 }
 
-.phone-notch {
-  width: 60px; height: 10px;
-  background: #1A1A1A;
-  border-radius: 10px;
-  margin: 0 auto 8px;
-}
+ .phone-notch { display: none; }
 
 .phone-screen {
   background: #fff;
-  border-radius: 22px;
+  border-radius: 16px;
   overflow: hidden;
   width: 100%;
   aspect-ratio: 9/16;
   position: relative;
 }
+
+/* Dynamic island — floats over the screenshot */
+.phone-screen::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 14px;
+  background: #111;
+  border-radius: 20px;
+  z-index: 10;
+  pointer-events: none;
+}
+ .phone-screen::before {
+    width: 30px;
+    height: 8px;
+    top: 5px;
+  }
+
 /* Phone frame */
 .carousel-col {
   position: sticky;
@@ -601,8 +617,8 @@ a:hover {
   width: 200px;
   margin: 0 auto;
   background: #1A1A1A;
-  border-radius: 32px;
-  padding: 12px 10px;
+  border-radius: 20px;
+  padding: 4px 4px;
   box-shadow: 0 0 0 1.5px #333, 0 20px 48px rgba(0,0,0,0.28);
 }
 @media (max-width: 680px) {
