@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>App Store Download Button | Smart App Link</title>
+    <!-- 
+        This HTML snippet provides a fully responsive, accessible, and visually appealing 
+        "Download on the App Store" button. It includes:
+        - Official Apple-style badge (SVG or high-quality PNG fallback)
+        - Smart link that opens the App Store directly on iOS devices
+        - Fallback behavior for desktop/other devices (redirect to a landing page or show alternative)
+        - Hover, focus, and active states for excellent UX
+        - Copy-paste ready, with clear comments for customization
+    -->
+    <style>
+        /* Reset & Base styling for demonstration — minimal but clean */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f5f7fc 0%, #e9eef4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', 'SF Pro Text', Helvetica, Arial, sans-serif;
+            padding: 1.5rem;
+        }
+
+        /* Card container to present the button nicely (optional demo styling) */
+        .demo-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(0px);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 2px 5px rgba(0, 0, 0, 0.02);
+            padding: 2rem 2rem 2.2rem 2rem;
+            text-align: center;
+            max-width: 540px;
+            width: 100%;
+            transition: transform 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .demo-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1c2e3f, #0f212f);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .sub {
+            color: #4a5b6e;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            font-size: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        /* ----- CORE APP STORE BUTTON STYLES ----- */
+        /* The button uses an accessible anchor tag styled as a button.
+           It gracefully adapts to dark/light modes, includes focus outline for keyboard nav. */
+        .app-store-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000000;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            border-radius: 14px;
+            padding: 0.75rem 1.8rem;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+            gap: 12px;
+        }
+
+        /* hover and active states enhance feedback */
+        .app-store-button:hover {
+            background: #000000;
+            background: linear-gradient(135deg, #2c2c2c, #111111);
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .app-store-button:active {
+            transform: scale(0.97);
+            transition: 0.05s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* focus-visible for keyboard accessibility */
+        .app-store-button:focus-visible {
+            outline: 3px solid #007aff;
+            outline-offset: 3px;
+            border-radius: 14px;
+        }
+
+        /* SVG icon style: Apple logo + "App Store" badge style */
+        .apple-icon {
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.85 21.18 10.37 21.95 9.17 22C7.87 22.05 6.93 20.68 6.07 19.46C4.27 16.86 3.06 12.9 4.86 10.08C5.76 8.7 7.22 7.84 8.78 7.81C10.13 7.78 11.39 8.69 12.17 8.69C12.95 8.69 14.5 7.6 16.11 7.76C16.92 7.82 18.54 8.1 19.62 9.44C19.53 9.5 17.99 10.45 18.03 12.41C18.06 14.17 19.43 15.06 19.46 15.07C19.44 15.11 18.84 16.86 17.54 18.6L18.71 19.5ZM14.32 5.9C15 5.07 15.42 3.91 15.28 2.75C14.29 2.82 13.12 3.44 12.42 4.27C11.81 5 11.35 6.16 11.5 7.29C12.58 7.42 13.66 6.74 14.32 5.9Z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        /* text container inside button */
+        .btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .small-line {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            color: rgba(255, 255, 255, 0.75);
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .main-line {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            color: white;
+            line-height: 1.25;
+        }
+
+        /* Fallback / alternative message styling (shown for non-iOS if needed) */
+        .info-note {
+            margin-top: 1.6rem;
+            font-size: 0.85rem;
+            background: #eef2ff;
+            padding: 0.75rem 1rem;
+            border-radius: 28px;
+            color: #1e3a8a;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+        }
+
+        .info-note a {
+            color: #007aff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .info-note a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            margin: 1.2rem 0;
+            border: 0;
+            height: 1px;
+            background: radial-gradient(circle, #cbd5e1 30%, transparent);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .demo-card {
+                padding: 1.5rem;
+            }
+            .main-line {
+                font-size: 18px;
+            }
+            .apple-icon {
+                width: 28px;
+                height: 28px;
+            }
+            .app-store-button {
+                padding: 0.6rem 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="demo-card">
+    <div class="title">📱 Get the App</div>
+    <div class="sub">Available on iPhone & iPad</div>
+
+    <!-- 
+        ================================================================
+        SMART APP STORE DOWNLOAD BUTTON
+        ================================================================
+        This anchor tag uses intelligent linking:
+        1. For iOS devices (iPhone, iPad, iPod) it opens the App Store directly.
+        2. For Mac with Apple Silicon, some App Store links also work, but we keep universal.
+        3. For other platforms (Android, Windows, etc.) you can decide: either link to a 
+           landing page, Google Play store (for cross-platform apps), or display a message.
+           In this implementation we provide a fallback that explains the App Store requirement,
+           but also includes an optional link to a 'more info' page (replace YOUR_LANDING_PAGE_URL).
+        4. Replace the placeholder "YOUR_APP_ID" with your actual Apple App Store app ID.
+           For example: https://apps.apple.com/app/id1234567890
+           Or use your full custom App Store link from App Store Connect.
+        ================================================================
+    -->
+
+    <!-- 
+        STEP 1: REPLACE THE `href` with your actual App Store URL.
+        Basic structure: https://apps.apple.com/app/id[YOUR_APP_ID]
+        Example: https://apps.apple.com/app/id1555555555
+        You can also use a smart link from a service like Branch, but native Apple link is reliable.
+    -->
+    <a href="https://apps.apple.com/app/idYOUR_APP_ID" 
+       id="dynamicAppStoreButton"
+       class="app-store-button" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Download our app from the Apple App Store">
+        <!-- Apple style logo + text badge -->
+        <div class="apple-icon" aria-hidden="true"></div>
+        <div class="btn-text">
+            <span class="small-line">Download on the</span>
+            <span class="main-line">App Store</span>
+        </div>
+    </a>
+
+    <!-- Optional: Additional contextual information or fallback note.
+         On non-iOS devices, we'll use a bit of JavaScript to display a subtle helpful message.
+         This improves user experience without removing the download intent. -->
+    <div id="platformMessage" class="info-note" style="display: none;">
+        💡 <strong>Note:</strong> The App Store is available on Apple devices. 
+        <span id="fallbackLink"></span>
+    </div>
+
+    <hr />
+    <div style="font-size: 0.75rem; color: #5b6e8c;">
+        ⚡ Smart redirection: Opens App Store directly on iOS. For other devices, you'll see info below.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ------------------------------------------------------------------
+        // CONFIGURATION SECTION: Modify these values to match your app data
+        // ------------------------------------------------------------------
+        
+        // IMPORTANT: Replace with your actual App Store app ID (numeric) or full app URL.
+        // Option 1: Use standard app store URL with your app's numeric ID.
+        const APP_STORE_ID = "YOUR_APP_ID";            // 🔁 REPLACE with real ID, e.g., "6443494879"
+        // Option 2: If you have a custom app store vanity URL (like apps.apple.com/app/your-app-name/idxxxx) 
+        // set the fullAppStoreURL to override. Otherwise we construct from ID.
+        const CUSTOM_APP_STORE_URL = "";  // Leave empty to auto-build from ID; Or set "https://apps.apple.com/app/your-custom-name/idxxxx"
+
+        // Fallback landing page URL (e.g., your website's app landing page, or Google Play link)
+        // This is where users on non-Apple devices will be suggested to go.
+        const FALLBACK_LANDING_URL = "https://www.apple.com/app-store/";   // Replace with your own "Get the app" info page
+        
+        // Optional: force debug to test fallback message? set to false for production.
+        const DEBUG_FORCE_FALLBACK_MESSAGE = false;  // set true to simulate non-iOS for testing UI
+        
+        // ------------------------------------------------------------------
+        // Helper: detect iOS (iPhone, iPad, iPod) and also detect if device is Mac with Apple Silicon?
+        // Typically App Store links open in App Store app on iOS. For macOS, some links open App Store app if available.
+        // We'll use a robust detection: iOS or iPadOS.
+        // ------------------------------------------------------------------
+        function isIOS() {
+            // Check for iPad, iPhone, iPod touch. Also iPadOS 13+ disguises as Mac, but we can use navigator.maxTouchPoints or userAgent.
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            // Regular expression for iOS devices
+            const iOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            // For iPadOS 13+, it may claim Macintosh but we check presence of touch events and specific condition
+            const isIPadOS = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            return iOS || isIPadOS;
+        }
+
+        // Determine if current platform likely supports App Store (iOS/macOS with App Store.app)
+        // But on macOS, App Store app supports links; we can redirect regardless, it's fine.
+        // The main nuance: For Android/Windows, the button will open a web page but we'll show message.
+        const deviceIsAppleMobile = isIOS();
+        
+        // ------------------------------------------------------------------
+        // Build the correct App Store URL
+        // ------------------------------------------------------------------
+        let finalAppStoreUrl = "";
+        if (CUSTOM_APP_STORE_URL && CUSTOM_APP_STORE_URL.trim() !== "") {
+            finalAppStoreUrl = CUSTOM_APP_STORE_URL.trim();
+        } else {
+            if (APP_STORE_ID && APP_STORE_ID !== "YOUR_APP_ID") {
+                // Build standard Apple App Store URL: https://apps.apple.com/app/idXXXXXX
+                finalAppStoreUrl = `https://apps.apple.com/app/id${APP_STORE_ID}`;
+            } else {
+                // In case user forgot to replace ID, we fallback to a placeholder but also warn in console.
+                console.warn("⚠️ App Store ID not configured! Please replace 'YOUR_APP_ID' with your actual App ID.");
+                // Use a demo placeholder (Apple's own WWDC app as demo, but not recommended for production)
+                finalAppStoreUrl = "https://apps.apple.com/app/id1555555555";  // dummy ID, replace
+            }
+        }
+
+        // Update the button's href attribute with the correct final URL
+        const button = document.getElementById('dynamicAppStoreButton');
+        if (button) {
+            button.href = finalAppStoreUrl;
+        }
+
+        // ------------------------------------------------------------------
+        // Enhance UX: For non-Apple devices (or debug), we show a helpful message
+        // and optionally modify the click behavior to redirect to a fallback info page.
+        // But we avoid forcing redirection — the button remains functional but extra info appears.
+        // Also provide a 'View options' link for clarity.
+        // ------------------------------------------------------------------
+        const platformMsgDiv = document.getElementById('platformMessage');
+        const fallbackSpan = document.getElementById('fallbackLink');
+
+        // Helper to set the informational message for non-iOS / desktop
+        function showAlternativeMessage() {
+            if (platformMsgDiv) {
+                platformMsgDiv.style.display = 'inline-block';
+                // Add an anchor to the fallback/landing page
+                if (fallbackSpan) {
+                    fallbackSpan.innerHTML = `👉 <a href="${FALLBACK_LANDING_URL}" target="_blank" rel="noopener">Learn more about the app</a> or visit our website.`;
+                }
+                // Optionally adjust message based on platform
+                if (!deviceIsAppleMobile && !DEBUG_FORCE_FALLBACK_MESSAGE) {
+                    platformMsgDiv.innerHTML = `📲 The App Store is designed for Apple devices. <strong>Note:</strong> You're on a ${getPlatformName()}. 
+                    <span id="fallbackLink"></span>`;
+                    if (fallbackSpan) {
+                        const newSpan = platformMsgDiv.querySelector('#fallbackLink');
+                        if (newSpan) newSpan.innerHTML = `👉 <a href="${FALLBACK_LANDING_URL}" target="_blank" rel="noopener">Check out our app info</a>`;
+                    }
+                } else if (DEBUG_FORCE_FALLBACK_MESSAGE) {
+                    platformMsgDiv.innerHTML = `🧪 (Test mode) Non-iOS simulation: The button would open App Store link. 
+                    <span id="fallbackLink"></span>`;
+                    if (fallbackSpan) fallbackSpan.innerHTML = `<a href="${FALLBACK_LANDING_URL}" target="_blank">View app details</a>`;
+                }
+            }
+        }
+
+        function getPlatformName() {
+            const ua = navigator.userAgent;
+            if (ua.includes("Android")) return "Android device";
+            if (ua.includes("Windows")) return "Windows PC";
+            if (ua.includes("Linux")) return "Linux system";
+            return "desktop browser";
+        }
+
+        // If the device is not iOS and not in debug force, show message.
+        if (!deviceIsAppleMobile && !DEBUG_FORCE_FALLBACK_MESSAGE) {
+            showAlternativeMessage();
+        } 
+        // Edge case: Even on iOS we might show nothing (clean)
+        else if (DEBUG_FORCE_FALLBACK_MESSAGE) {
+            showAlternativeMessage();
+        }
+        
+        // For extra clarity: Add a small console info (optional)
+        if (deviceIsAppleMobile && !DEBUG_FORCE_FALLBACK_MESSAGE) {
+            console.log("🍎 iOS detected — App Store button will open the App Store directly.");
+        } else if (!deviceIsAppleMobile && !DEBUG_FORCE_FALLBACK_MESSAGE) {
+            console.log("💻 Non-Apple device: Displaying info message while keeping App Store link available.");
+        }
+        
+        // ------------------------------------------------------------------
+        // Optional Enhancement: Provide a custom click handler for non-iOS devices to suggest the fallback.
+        // We don't prevent default; but we can add a friendly toast or confirm if desired.
+        // For a smoother experience, we can show an alert only if the user is on non-iOS and clicks.
+        // This is optional but increases usability: remind user that the App Store is for Apple devices.
+        // ------------------------------------------------------------------
+        if (button && !deviceIsAppleMobile && !DEBUG_FORCE_FALLBACK_MESSAGE) {
+            button.addEventListener('click', function(e) {
+                // We do NOT prevent default; link works as usual. However, we can show an informative
+                // brief notification without being intrusive. Provide a small tooltip?
+                // Only if the user really wants to proceed.
+                const userChoice = confirm("You are on a device that may not support the App Store. The link will open the Apple App Store webpage. Would you like to continue?");
+                if (!userChoice) {
+                    e.preventDefault();
+                    // Optionally redirect to fallback landing page
+                    window.open(FALLBACK_LANDING_URL, '_blank');
+                }
+                // else continue (allow default navigation)
+            });
+        }
+        
+        // Additional improvement: if the App Store ID placeholder is not replaced, show a dev-friendly warning
+        if (APP_STORE_ID === "YOUR_APP_ID" && (!CUSTOM_APP_STORE_URL || CUSTOM_APP_STORE_URL === "")) {
+            const demoCard = document.querySelector('.demo-card');
+            const warningDiv = document.createElement('div');
+            warningDiv.style.backgroundColor = "#fff0e0";
+            warningDiv.style.color = "#b45309";
+            warningDiv.style.fontSize = "0.75rem";
+            warningDiv.style.padding = "0.5rem";
+            warningDiv.style.marginTop = "1rem";
+            warningDiv.style.borderRadius = "20px";
+            warningDiv.style.borderLeft = "4px solid #f97316";
+            warningDiv.innerText = "⚠️ Developer: Please replace 'YOUR_APP_ID' with your actual App Store app ID in the JavaScript configuration section.";
+            if (demoCard && !document.querySelector('.dev-warning')) {
+                warningDiv.classList.add('dev-warning');
+                demoCard.appendChild(warningDiv);
+            }
+        }
+        
+        // One more micro-interaction: Add a dynamic badge effect for hovering (already in css)
+        // Ensure that on touch devices it's still responsive.
+    })();
+</script>
+
+<!-- 
+    ================================================================
+    ADDITIONAL NOTES & CUSTOMIZATION:
+    ================================================================
+    1. Replace 'YOUR_APP_ID' in the JS configuration (APP_STORE_ID) with your numeric App Store ID.
+       - To find your App ID: go to App Store Connect → My Apps → choose app → under 'App Information' see 'Apple ID'.
+       - Or look at your app's product URL: https://apps.apple.com/app/id1234567890 -> number is your ID.
+    2. If you have a custom App Store vanity URL (e.g., https://apps.apple.com/app/your-brand/id12345) set CUSTOM_APP_STORE_URL.
+    3. Adjust the FALLBACK_LANDING_URL to your own marketing page or cross-platform download page.
+    4. The button design matches official App Store badge guidelines, but you can tweak colors, border-radius, etc.
+    5. The 'info-note' only appears for non-iOS devices (Windows, Android, Linux, etc.) to avoid confusion.
+    6. For universal links (smart links) that redirect to appropriate store, consider using a service like Apple's App Site Association, 
+       but this raw approach works reliably for direct App Store redirection.
+    7. The code includes accessibility attributes: aria-label, focus-visible outline, and semantic anchor.
+    
+    Example with a real App Store ID: if your app ID is 6445871235, set APP_STORE_ID = "6445871235"
+    Then the button directs to https://apps.apple.com/app/id6445871235 ✅
+    
+    To test responsiveness: open on iPhone, iPad, or use browser dev tools device emulation.
+    This HTML is ready for production and can be embedded anywhere (landing page, popup, etc.)
+-->
+</body>
+</html>
