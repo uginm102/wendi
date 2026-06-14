@@ -63,32 +63,10 @@ body {
   color: var(--c-text-primary);
   background: var(--c-bg-secondary);
   min-height: 100vh;
+
   display: flex;
   flex-direction: column;
-}
-
-/* Push footer to bottom when content is short */
-body > .nav,
-body > .breadcrumb-bar,
-body > .hero,
-body > .quick-links-wrap,
-body > .section,
-body > .popular-section,
-body > .steps-section,
-body > .page-layout {
-  flex-shrink: 0;
-}
-
-body > .page-layout,
-body > .section:last-of-type,
-body > .popular-section {
-  flex-grow: 1;
-}
-
-body > .footer-cta,
-body > .footer {
-  flex-shrink: 0;
-  margin-top: auto;
+  margin: 0;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -309,6 +287,10 @@ ul { list-style: none; }
 .chip .ti { font-size: 14px; }
 
 /* --- Footer CTA --- */
+/* MAIN CONTENT - This grows to push footer down */
+.main-content, .page-layout {
+  flex: 1; /* KEY: Takes all available space */
+}
 .footer-cta {
   background: var(--orange);
   padding: 28px 24px;
@@ -429,16 +411,32 @@ ul { list-style: none; }
   padding: 3px 0;
   transition: opacity 0.15s;
 }
+.topic-links li{
+  margin-left: 20px;
+}
+
 .topic-links li a::before {
   content: '·';
   color: var(--orange-mid);
   margin-right: 6px;
   font-size: 16px;
 }
-.topic-links li a:hover { text-decoration: underline; }
+
+a {
+  text-decoration: none;
+  background: linear-gradient(to right, currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 0 1px;
+  transition: background-size 0.3s;
+}
+
+
+a:hover { 
+  background-size: 100% 1px;
+}
 
 /* --- Aside --- */
-.page-aside { }
 .aside-card {
   background: var(--c-bg-primary);
   border: 0.5px solid var(--c-border);
@@ -454,7 +452,7 @@ ul { list-style: none; }
   transition: opacity 0.15s;
 }
 .aside-links a .ti { font-size: 14px; }
-.aside-links a:hover { text-decoration: underline; }
+/* .aside-links a:hover { text-decoration: underline; } */
 
 .contact-btn {
   display: inline-flex; align-items: center; gap: 7px;
@@ -553,46 +551,39 @@ ul { list-style: none; }
   .quick-link span { font-size: 10px; }
 }
 
-/* =============================================
-   CAROUSEL — shared
-   ============================================= */
-
-/* ── Article grid: phone left, steps right on desktop ── */
+/* ── Carousel & Steps Layout ── */
 .article-grid {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 40px;
   align-items: start;
 }
 
-/* ── Phone column: sticky on desktop ── */
-.carousel-col {
-  position: sticky;
-  top: 72px;
+@media (max-width: 680px) {
+  .article-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .steps-list { order: -1; }           /* Steps on top on mobile */
+}
+@media (max-width: 680px) {
+  .phone-frame {
+    width: 260px;               /* bigger & more readable on phones */
+    max-width: 92vw;
+  }
 }
 
-/* ── Phone frame ── */
-.phone-frame {
-  width: 200px;
-  margin: 0 auto;
-  background: #1A1A1A;
-  border-radius: 32px;
-  padding: 6px 6px; /* reduced — notch is now inside the screen */
-  box-shadow: 0 0 0 1.5px #333, 0 20px 48px rgba(0,0,0,0.28);
-  touch-action: pan-y;
-}
-.phone-notch {
-  display: none; /* replaced by dynamic island pseudo-element below */
-}
+ .phone-notch { display: none; }
+
 .phone-screen {
-  background: #111;
-  border-radius: 26px;
+  background: #fff;
+  border-radius: 16px;
   overflow: hidden;
   width: 100%;
   aspect-ratio: 9/16;
   position: relative;
-  user-select: none;
 }
+
 /* Dynamic island — floats over the screenshot */
 .phone-screen::before {
   content: '';
@@ -607,14 +598,172 @@ ul { list-style: none; }
   z-index: 10;
   pointer-events: none;
 }
+ .phone-screen::before {
+    width: 30px;
+    height: 8px;
+    top: 5px;
+  }
 
-/* ── Slide transitions ── */
+/* Phone frame */
+.carousel-col {
+  position: sticky;
+  top: 76px;
+}
+@media (max-width: 680px) {
+  .carousel-col { position: static; }
+}
+
+.phone-frame {
+  width: 200px;
+  margin: 0 auto;
+  background: #1A1A1A;
+  border-radius: 20px;
+  padding: 4px 4px;
+  box-shadow: 0 0 0 1.5px #333, 0 20px 48px rgba(0,0,0,0.28);
+}
+@media (max-width: 680px) {
+  .phone-frame { width: 280px; max-width: 92vw; }
+}
+
+/* Arrow navigation (both sides) */
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.nav-arrow {
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.9);
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  font-size: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+.nav-arrow:hover {
+  background: var(--orange);
+  color: #fff;
+  transform: scale(1.05);
+}
+@media (max-width: 680px) {
+  .nav-arrow { width: 40px; height: 40px; font-size: 22px; }
+}
+
+/* ── STEPS: Desktop = all visible, Mobile = only current step ── */
+.steps-list .step-item {
+  display: flex;                    /* Desktop: show ALL steps */
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 14px;
+  margin: 0 -12px;
+  border-radius: var(--radius-md);
+  border-bottom: 0.5px solid var(--c-border);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.steps-list .step-item:last-child { border-bottom: none; }
+
+.steps-list .step-item:hover {
+  background: var(--c-bg-secondary);
+}
+.steps-list .step-item.active {
+  background: var(--orange-light);
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-text-primary);
+  margin-bottom: 4px;
+}
+
+.step-desc {
+  font-size: 14px;
+  color: var(--c-text-secondary);
+  line-height: 1.5;
+}
+
+/* Mobile: Only show current step */
+@media (max-width: 680px) {
+  .steps-list .step-item {
+    display: none;                    /* Hide all except active */
+  }
+  .steps-list .step-item.active {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 18px;
+    background: var(--orange-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+  .steps-list .step-item.active .step-num {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+    background: var(--orange);
+    color: #fff;
+    margin-bottom: 8px;
+    
+  }
+  .steps-list .step-item.active .step-title {
+    font-size: 17px;
+  }
+  .steps-list .step-item.active .step-desc {
+    font-size: 15px;
+  }
+}
+@media (min-width: 681px) {
+  .step-item:last-child { border-bottom: none; }
+.step-item:hover,
+.step-item:active {
+  background: var(--c-bg-secondary, #F7F6F2);
+}
+.step-item.active {
+  background: var(--orange-light, #FAECE7);
+}
+.step-item.active .step-num {
+  background: var(--orange, #E8511A);
+  box-shadow: 0 0 0 4px rgba(232,81,26,0.18);
+  color: #fff;
+}
+.step-item.active .step-title {
+  color: var(--orange-dark, #993C1D);
+}
+}
+
+/* Rest of carousel */
 .slide {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(18px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
   pointer-events: none;
 }
 .slide.active {
@@ -622,181 +771,41 @@ ul { list-style: none; }
   transform: translateY(0);
   pointer-events: auto;
 }
+.slide svg { width: 100%; height: 100%; display: block; }
+
 .slide.slide-prev  { transform: translateX(-24px); }
 .slide.slide-next  { transform: translateX(24px); }
 .slide svg { width: 100%; height: 100%; display: block; }
 .slide img  { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top; }
 
-/* ── Dot indicators ── */
+
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 16px;
 }
 .dot {
-  width: 6px; height: 6px;
+  width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--c-border-strong);
-  transition: background 0.2s, transform 0.2s, width 0.2s;
+  background: var(--c-border-strong, #ccc);
+  transition: all 0.2s ease;
   cursor: pointer;
   border: none;
   padding: 0;
 }
 .dot.active {
   background: var(--orange);
-  transform: scale(1.4);
+  transform: scale(1.5);
 }
 
-/* ── Upload hint ── */
 .upload-hint {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 11px;
   color: var(--c-text-tertiary);
-  margin-top: 10px;
+  margin-top: 12px;
   justify-content: center;
   text-align: center;
-  font-family: var(--font-body);
-}
-
-/* ── Mobile step info (hidden on desktop) ── */
-.mobile-step-info { display: none; }
-
-/* ── Step items ── */
-.step-item {
-  cursor: pointer;
-  border-radius: var(--radius-md);
-  padding: 14px 12px;
-  margin: 0 -12px;
-  transition: background 0.2s;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  border-bottom: 0.5px solid var(--c-border);
-}
-.step-item:last-child { border-bottom: none; }
-.step-item:hover  { background: var(--c-bg-secondary); }
-.step-item.active { background: var(--orange-light); }
-.step-item.active .step-num {
-  background: var(--orange);
-  box-shadow: 0 0 0 4px rgba(232,81,26,0.18);
-  color: #fff;
-}
-.step-item.active .step-title { color: var(--orange-dark); }
-
-
-/* =============================================
-   CAROUSEL — MOBILE  (≤ 680px)
-   Collapses into a compact sticky strip:
-   [ phone thumbnail ]  [ step N of 6 · title · dots ]
-   Steps list scrolls below the strip.
-   ============================================= */
-@media (max-width: 680px) {
-
-  /* Single column; phone strip always at top */
-  .article-grid {
-    display: block;
-  }
-
-  /* Sticky horizontal strip */
-  .carousel-col {
-    position: sticky;
-    top: 56px;           /* nav height */
-    z-index: 90;
-    background: var(--c-bg-primary);
-    border-bottom: 0.5px solid var(--c-border);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 14px;
-    padding: 10px 16px;
-    margin: 0 -16px;     /* bleed to edges */
-  }
-
-  /* Smaller phone on mobile */
-  .phone-frame {
-    width: 100px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    padding: 4px 4px;
-    box-shadow: 0 0 0 1px #333, 0 6px 18px rgba(0,0,0,0.22);
-  }
-  .phone-notch { display: none; }
-  .phone-screen { border-radius: 16px; }
-  .phone-screen::before {
-    width: 30px;
-    height: 8px;
-    top: 5px;
-  }
-
-  /* Swipe arrows on either side of phone */
-  .phone-frame-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .swipe-btn {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    border: none;
-    background: var(--orange-light);
-    color: var(--orange);
-    font-size: 13px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.15s;
-    padding: 0;
-  }
-  .swipe-btn:hover { background: var(--orange); color: #fff; }
-  .swipe-btn:disabled { opacity: 0.3; cursor: default; }
-
-  /* Info panel beside phone */
-  .mobile-step-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    flex: 1;
-    min-width: 0;
-  }
-  .mobile-step-counter {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--orange);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .mobile-step-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--c-text-primary);
-    line-height: 1.3;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Dots: horizontal, left-aligned */
-  .carousel-dots {
-    margin-top: 6px;
-    justify-content: flex-start;
-  }
-
-  /* Hide desktop-only hint */
-  .upload-hint { display: none; }
-
-  /* Steps list: add top padding so first item isn't hidden behind sticky strip */
-  .steps-list {
-    padding-top: 8px;
-    margin-bottom: 24px;
-  }
-
-  /* Step items: slightly more compact */
-  .step-item {
-    padding: 12px 10px;
-    margin: 0 -10px;
-  }
 }

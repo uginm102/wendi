@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wendi Help &amp; Support</title>
     <link rel="icon" type="image/png" href="images/logo-full.png" />
-    <link rel="stylesheet" href="styles.css?v=2" />
+    <link rel="stylesheet" href="styles.css?v=4" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
@@ -143,25 +143,18 @@
             background: radial-gradient(circle, #cbd5e1 40%, transparent);
         }
 
-        /* ---------- RESPONSIVE: ROW LAYOUT ON MOBILE (NO STACKING) ---------- */
-        /* 
-           On very small screens (below 500px), buttons may wrap if there isn't enough space,
-           but they will still be in row direction (flex-direction: row) and wrap as a last resort.
-           To ensure they never wrap and stay side-by-side, we can add a min-width to the container
-           and adjust button padding. However, for extreme screens (320px), we slightly shrink 
-           button padding but maintain row layout.
-        */
+        
         @media (max-width: 550px) {
             .buttons-wrapper {
-                gap: 0.8rem;              /* Slightly smaller gap on mobile but still row */
-                flex-wrap: wrap;          /* Allow wrap ONLY if both buttons don't fit, but they will due to shrink */
+                gap: 0.8rem;
+                flex-wrap: wrap;
                 justify-content: center;
             }
             
             .store-button {
                 padding: 0.55rem 1rem;
                 gap: 8px;
-                flex-shrink: 1;           /* Allow slight shrinking if needed */
+                flex-shrink: 1;
             }
             
             .apple-icon, .google-icon {
@@ -206,13 +199,9 @@
             }
         }
         
-        /* For devices as small as 360px, keep them side by side by forcing no-wrap? 
-           We'll set a media query that ensures the wrapper has enough flexibility, but
-           we prioritize row direction. If text becomes too cramped, we use smaller text.
-           The buttons remain in a row layout even on 320px screens. */
         @media (max-width: 380px) {
             .buttons-wrapper {
-                flex-wrap: nowrap;        /* Force no wrapping on tiny screens to keep row */
+                flex-wrap: nowrap;
                 gap: 0.5rem;
             }
             
@@ -234,7 +223,6 @@
             }
         }
         
-        /* For very small screens (<= 340px) we keep row direction and further fine-tune */
         @media (max-width: 340px) {
             .store-button {
                 padding: 0.4rem 0.5rem;
@@ -330,10 +318,7 @@
               <p class="guide-tag">Guide</p>
               <h3 class="guide-title">Your Guide to Wendi as a User</h3>
               <p class="guide-desc">
-                This user guide is designed to help end users easily navigate
-                and use the Pearl Bank Wendi App, with step-by-step guidance on
-                account access, transactions, key features, security, and
-                everyday banking activities.
+                This guide helps users navigate Pearl Bank Wendi App securely for banking tasks.
               </p>
             </div>
           </a>
@@ -346,11 +331,7 @@
               <p class="guide-tag">Guide</p>
               <h3 class="guide-title">Your Guide to Wendi as a Merchant</h3>
               <p class="guide-desc">
-                This merchant guide is designed to help merchants effectively
-                navigate and use the Pearl Bank Wendi App, with step-by-step
-                guidance on merchant onboarding, payment collection, transaction
-                management, settlements, security, and day-to-day merchant
-                operations.
+                This guide helps merchants use the Pearl Bank Wendi App for onboarding, payments, transactions, settlements, security, and daily operations.
               </p>
             </div>
           </a>
@@ -363,10 +344,7 @@
               <p class="guide-tag">Guide</p>
               <h3 class="guide-title">Your Guide to Wendi as an Agent</h3>
               <p class="guide-desc">
-                This guide is designed to help Agents effectively navigate and
-                use the Pearl Bank Wendi App, with step-by-step guidance on
-                agent onboarding, customer transactions, cash management,
-                security, and day-to-day agent banking operations.
+                Guide for Agents using Pearl Bank Wendi App: onboarding, transactions, cash, security, operations.
               </p>
             </div>
           </a>
@@ -379,11 +357,7 @@
               <p class="guide-tag">Guide</p>
               <h3 class="guide-title">Your Guide as a Sacco on Wendi</h3>
               <p class="guide-desc">
-                This guide is designed to help users in Saccos and group
-                settings easily navigate and use the Pearl Bank Wendi App,
-                providing clear step-by-step guidance on group account access,
-                contributions, transactions, approvals, security, and everyday
-                financial management activities.
+                Guide for SACCOs using Pearl Bank Wendi App: accounts, transactions, approvals, security.
               </p>
             </div>
           </a>

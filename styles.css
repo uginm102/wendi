@@ -349,7 +349,7 @@ ul { list-style: none; }
 
 @media (max-width: 720px) {
   .page-layout { grid-template-columns: 1fr; }
-  .page-aside { order: -1; }
+  /* .page-aside { order: -1; } */
 }
 
 .page-heading {
@@ -562,15 +562,20 @@ a:hover {
 @media (max-width: 680px) {
   .article-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 5px;
   }
-  .steps-list { order: -1; }           /* Steps on top on mobile */
-}
-@media (max-width: 680px) {
+  .steps-list { order: -1; }   
   .phone-frame {
-    width: 260px;               /* bigger & more readable on phones */
+    width: 235px !important;               /* bigger & more readable on phones */
     max-width: 92vw;
-  }
+  }        /* Steps on top on mobile */
+  .carousel-wrapper {
+    gap: 5px;
+}
+}
+
+@media (max-width: 680px) {
+  /* .phone-frame { width: 200px; max-width: 92vw; } */
 }
 
  .phone-notch { display: none; }
@@ -621,9 +626,7 @@ a:hover {
   padding: 4px 4px;
   box-shadow: 0 0 0 1.5px #333, 0 20px 48px rgba(0,0,0,0.28);
 }
-@media (max-width: 680px) {
-  .phone-frame { width: 280px; max-width: 92vw; }
-}
+
 
 /* Arrow navigation (both sides) */
 .carousel-wrapper {
@@ -664,7 +667,7 @@ a:hover {
   display: flex;                    /* Desktop: show ALL steps */
   align-items: flex-start;
   gap: 16px;
-  padding: 16px 14px;
+  padding: 10px 8px;
   margin: 0 -12px;
   border-radius: var(--radius-md);
   border-bottom: 0.5px solid var(--c-border);
@@ -717,7 +720,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 20px 18px;
+    padding: 0 10px;
     background: var(--orange-light);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
