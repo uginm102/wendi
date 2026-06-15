@@ -333,7 +333,7 @@ ul { list-style: none; }
   font-size: 13px;
 }
 .breadcrumb-link { color: var(--orange); }
-.breadcrumb-link:hover { text-decoration: underline; }
+/* .breadcrumb-link:hover { text-decoration: underline; } */
 .breadcrumb-sep { font-size: 12px; color: var(--c-text-tertiary); }
 .breadcrumb-current { color: var(--c-text-secondary); }
 
@@ -432,7 +432,7 @@ a {
 }
 
 
-a:hover { 
+a:not(.quick-link):hover { 
   background-size: 100% 1px;
 }
 
